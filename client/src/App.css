@@ -48,3 +48,65 @@
     color: white;
     cursor: pointer;
   }
+
+  .main-home {
+    width: 50%;
+    height: auto;
+    margin-left: auto;
+    display: block;
+  }
+
+  .saying-container {
+    position: absolute;
+    left: 5%;
+    top: 40%;
+    width: 40%; /* Set a width to make it responsive */
+    max-width: 800px; /* Maximum width */
+  }
+
+  .saying-title {
+    color: black; /* Add any styles you want for the title */
+    font-size: 50px;
+  }
+
+  .saying-content {
+    overflow-wrap: break-word; /* Allow the text to wrap */
+    word-wrap: break-word; /* For IE */
+    line-height: 1.6; /* Add line height for readability */
+    padding-top: 10px;
+    color: rgba(128, 128, 128, 0.845);
+    font-size: 20px;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch; /* This will make its children stretch to cover the available height */
+    position: relative;
+    padding: 50px;
+    background-image: linear-gradient(to right, white 50%, black 50%);
+    height: 20vh;
+    
+    
+  }
+  
+  .left,
+  .right {
+    align-self: stretch; /* This will ensure both divs stretch vertically to fill the footer */
+    display: flex;
+    align-items: flex-end; /* This will push the content to the bottom of the divs */
+    color: black;
+    padding: 5px;
+    text-decoration: none;
+    color: rgb(158, 159, 165);
+  }
+  
+  .rights-reserved {
+    position: absolute;
+    top: 85%;
+    padding-left: 15.5rem;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    color: rgb(158, 159, 165);
+    font-size: large;
+  }

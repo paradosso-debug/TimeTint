@@ -16,6 +16,10 @@ const App = () => {
         <Route path="/products" element={<Products />} />
         <Route path="/cart" element={<CartPage />} />
       </Routes>
+
+      <Routes>
+        
+      </Routes>
     </BrowserRouter>
   );
 };
