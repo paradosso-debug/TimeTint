@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import watch from "../assets/watch.jpg";
+import Reviews from "./Reviews";
 
 function Main() {
   return (
@@ -34,6 +35,7 @@ function Main() {
           bringing an unparalleled level of grace and sophistication to every
           moment of your life.
         </motion.p>
+        <Reviews/>
       </motion.div>
       <img className="main-home" src={watch} alt="clock-men-image" />
     </>

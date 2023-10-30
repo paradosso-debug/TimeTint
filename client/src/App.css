@@ -122,3 +122,41 @@
   display: flex;
   align-items: center;
 }
+
+.reviews-container {
+  background-color: beige;
+  border-color: yellowgreen;
+  display: flex;
+  flex-direction: column; /* explicitly set to column */
+  align-items: center; /* horizontally center the items */
+  height: 60rem;
+  width: 50rem;
+  padding-top: 20rem;
+}
+
+.testimonials {
+  display: flex;
+  background-color: brown;
+  padding-top: 3rem;
+}
+
+.arthor {
+  background-color: aquamarine;
+  padding-top: 3rem;
+}
+
+
+/* For laptops */
+@media (min-width: 1024px) and (max-width: 1440px) {
+  /* Your laptop-specific styles go here */
+
+
+  .saying-title {
+      font-size: 40px; /* adjust as needed */
+  }
+  .reviews-container{
+    padding-top: 10rem;
+    height: 30rem;
+    width: 30rem;
+  }
+}
