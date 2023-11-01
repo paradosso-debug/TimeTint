@@ -29,6 +29,7 @@ const Reviews = () => {
   return (
     <>
       <div className="reviews-container">
+        <div className="reviews-second-container">
         <h1>Testimonials</h1>
         <h2 className="testimonials">
           {" "}
@@ -41,6 +42,7 @@ const Reviews = () => {
             ? reviews[currentReviewIndex].author
             : ""}
         </p>
+        </div>
       </div>
     </>
   );

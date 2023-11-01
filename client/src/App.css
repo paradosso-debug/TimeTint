@@ -109,40 +109,75 @@
   font-size: large;
 }
 
-.product-container-first {
-  background-color: rgb(196, 48, 48);
-  height: 100vh;
+.products-wrapper {
+  display: flex; /* To lay out its children (the two divs) side by side */
+  height: 100vh; /* To ensure it takes the full width available */
+}
+
+.product-container-first, 
+.product-container-second {
+  align-self: stretch; /* This will ensure both divs stretch vertically to fill the footer */
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* This will push the content to the bottom of the divs */
+  color: black;
+  padding-top: 10rem;
+  text-decoration: none;
+  flex: 1; /* Each div will take up half of the space */
+}
+
+.product-container-first {
+  padding-top: calc(40vh - 20px);
+  
+}
+
+
+.product-left-container{
+  height: calc(50vh - 20px);
+  width: calc(100vh - 20px);
+  margin: auto;
+  align-self: center;
+padding-left: 3rem;
+}
+.product-left-h2 {
+  color: rgb(158, 159, 165);
+  padding-top: 1.5rem;
 }
 
 .product-container-second {
-  background-color: rgb(94, 126, 14);
-  height: 100vh;
-  display: flex;
-  align-items: center;
+  background-color: black; /* Right div background color */
+  color: white; /* Text color for the right div, since its background is black */
 }
 
+
 .reviews-container {
-  background-color: beige;
-  border-color: yellowgreen;
   display: flex;
   flex-direction: column; /* explicitly set to column */
   align-items: center; /* horizontally center the items */
-  height: 60rem;
+  height: 40rem;
   width: 50rem;
-  padding-top: 20rem;
+  padding-top: 15rem;
+
+}
+
+.reviews-second-container{
+  display: flex;
+  flex-direction: column; /* explicitly set to column */
+  align-items: center; /* horizontally center the items */
+ border: rgba(128, 128, 128, 0.845) solid 2px;
+ border-radius: .5rem;
+ padding: 2rem;
 }
 
 .testimonials {
   display: flex;
-  background-color: brown;
-  padding-top: 3rem;
+  color: rgba(128, 128, 128, 0.845);
+  padding-top: 2rem;
+  font-weight: lighter;
 }
 
 .arthor {
-  background-color: aquamarine;
-  padding-top: 3rem;
+  color: rgb(185, 143, 125);
+  padding-top: 2rem;
 }
 
 
