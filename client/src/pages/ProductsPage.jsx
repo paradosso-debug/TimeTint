@@ -1,13 +1,13 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import Products from "../components/Products";
+import Product from "../components/Product";
 
 const ProductsPage = () => {
   return (
     <>
       <Navbar />
-      <Products />
+      <Product />
       <Footer />
     </>
   );
