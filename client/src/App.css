@@ -23,6 +23,9 @@
   font-weight: bold;
   object-fit: contain;
   text-decoration: none;
+  
+}
+.brand-name:hover{
   cursor: pointer;
 }
 
@@ -179,12 +182,20 @@
 .slider-item {
   display: flex;
   align-items: center;
-  margin-left: 5rem;
-  padding: 14rem;
-  background-color: transparent;
-  border-radius: 5px;
-  box-shadow: 0 0 0px transparent;
+  margin-left: 10rem;
+  margin-top: 8rem;
+  padding: 5rem;
+  background-color: transparent; /* Keep it transparent for glass effect */
+  border-radius: 20px;
+  box-shadow: 0 0 0px transparent; /* Existing shadow kept as transparent */
+
+  /* Glassmorphism styles */
+  background: rgba(255, 255, 255, 0.148); /* Semi-transparent white background */
+  backdrop-filter: blur(10px); /* Blur effect for the background */
+  -webkit-backdrop-filter: blur(10px); /* Fallback for Safari */
+  border: 1px solid rgba(255, 255, 255, 0.623); /* Light white border for more 'glass' effect */
 }
+
 
 .slider-image {
   max-width: 300px;
@@ -210,7 +221,7 @@
 
 .slider-button {
   color: gray;
-  background-color: black;
+  background-color: transparent;
   border: none;
   cursor: pointer;
   font-size: medium;
@@ -247,6 +258,8 @@
   background-color: rgb(158, 159, 165);
 }
 
+
+
 /* For laptops */
 @media (min-width: 1024px) and (max-width: 1440px) {
   /* Your laptop-specific styles go here */
@@ -257,54 +270,7 @@
 
 /* Laptop Devices */
 @media (min-width: 1024px) and (max-width: 1440px) {
-  .slider-item {
-    padding: 2rem;
-    margin-left: 3rem;
-  }
 
-  .slider-image {
-    max-width: 250px;
-  }
-}
-
-/* Phone Screens */
-@media (max-width: 768px) {
-  .slider-item {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 4rem;
-    margin-left: 1rem;
-  }
-
-  .slider-image {
-    max-width: 200px;
-    margin-bottom: 20px;
-  }
-
-  .slider-description {
-    text-align: center;
-    margin-top: 20px;
-  }
-}
-
-/* For laptops */
-@media (min-width: 1024px) and (max-width: 1440px) {
-  /* Your laptop-specific styles go here */
-
-  .saying-title {
-    font-size: 40px; /* adjust as needed */
-  }
-  .reviews-container {
-    padding-top: 10rem;
-    height: 30rem;
-    width: 30rem;
-  }
-}
-
-/* dgdg */
-
-/* Laptop Devices */
-@media (min-width: 1024px) and (max-width: 1440px) {
   .brand-name {
     font-size: 28px;
     padding-left: 3rem;
@@ -322,7 +288,41 @@
   .header {
     width: 100.1%;
   }
+
+  .slider-item {
+    padding: 10px;
+    margin-left: 3rem;
+   margin-top: 1.5rem;
+  }
+
+  .slider-image {
+    max-width: 200px;
+  }
+
+  .add-to-cart{
+    width: 10rem;
+    margin-left: 4rem;
+  }
+
+  .slider-description {
+    display: flex;
+  flex-direction: column;
+    
+  }
+
+  .saying-title {
+    font-size: 40px; /* adjust as needed */
+  }
+  .reviews-container {
+    padding-top: 10rem;
+    height: 30rem;
+    width: 30rem;
+  }
+
 }
+
+
+/* dgdg */
 
 /* Phone Screens */
 @media (max-width: 768px) {
@@ -350,5 +350,22 @@
   .main-home {
     width: 100%;
     margin: 0;
+  }
+
+  .slider-item {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 4rem;
+    margin-left: 1rem;
+  }
+
+  .slider-image {
+    max-width: 200px;
+    margin-bottom: 20px;
+  }
+
+  .slider-description {
+    display: flex;
+    flex-direction: column;
   }
 }

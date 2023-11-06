@@ -49,7 +49,7 @@ const Product = () => {
               ease: "easeInOut",
             }}
           >
-            Elevate Every Moment.
+            Elevate Every Moment
           </motion.h1>
           <motion.h2
             initial={{ opacity: 0 }}
