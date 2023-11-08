@@ -182,8 +182,8 @@
 .slider-item {
   display: flex;
   align-items: center;
-  margin-left: 10rem;
-  margin-top: 8rem;
+  margin-left: 15rem;
+  margin-top: 6rem;
   padding: 5rem;
   background-color: transparent; /* Keep it transparent for glass effect */
   border-radius: 20px;
@@ -201,6 +201,7 @@
   max-width: 300px;
   height: auto;
   margin-left: 20px;
+    margin-right: 20px;
   flex-direction: column;
 }
 .image-with-navigation {
@@ -225,6 +226,7 @@
   border: none;
   cursor: pointer;
   font-size: medium;
+  margin-top: 1rem;
 }
 
 .slider-button:hover {
@@ -290,18 +292,23 @@
   }
 
   .slider-item {
-    padding: 10px;
-    margin-left: 3rem;
-   margin-top: 1.5rem;
+  
+    padding: 15px;
+    margin-left: 5rem;
+   margin-top: -2rem;
   }
 
   .slider-image {
-    max-width: 200px;
+    max-width: 250px;
+    margin-top: 2rem;
   }
+
+  
 
   .add-to-cart{
     width: 10rem;
-    margin-left: 4rem;
+    margin-left: 1px;
+    
   }
 
   .slider-description {

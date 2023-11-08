@@ -8,9 +8,8 @@ const Navbar = () => {
   return (
     <>
     <header className='header'>
-     <div className='brand-name'>TimeTint</div>
      
-        
+            <Link to='/' className='brand-name'>TimeTint</Link>
             <Link to='/' className='nav-links'>Home</Link>
             <Link to='/login' className='nav-links'>Login</Link>
             <Link to='/sign-up' className='nav-links'>Register</Link>
