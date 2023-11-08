@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import reviewsRouter from "./routes/reviews.js";
+import productRouter from "./routes/product.js";
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ mongoose.connection.on("error", (err) => {
 });
 
 app.use("/api/reviews", reviewsRouter);
+app.use("/api/products", productRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello, World!");

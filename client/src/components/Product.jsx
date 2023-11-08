@@ -1,24 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import invictawatch from "../assets/invictawatch.jpg";
-import louiserardwatch from "../assets/louiserardwatch.jpg";
+import axios from "axios";
+
 const Product = () => {
+  const [products, setProducts] = useState([]);
   const [currentProductIndex, setCurrentProductIndex] = useState(0);
 
-  const products = [
-    {
-      name: "Product 1",
-      description: "Product description for Product 1 goes here.",
-      price: "$99.99",
-      image: invictawatch,
-    },
-    {
-      name: "Product 2",
-      description: "Product description for Product 1 goes here.",
-      price: "$89.99",
-      image: louiserardwatch,
-    },
-  ];
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get("http://localhost:5001/api/products");
+        setProducts(response.data);
+      } catch (error) {
+        console.error("Error fetching products", error.response);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const handlePrev = () => {
     setCurrentProductIndex(
@@ -66,28 +65,36 @@ const Product = () => {
       <div className="product-container-second">
         <motion.div
           initial={{ x: "100%" }}
-          animate={{ x: 2 }}
+          animate={{ x: 0 }}
           transition={{ delay: 0.5, duration: 1 }}
           className="slider-item"
         >
           <div className="image-with-navigation">
-            <img
-              src={products[currentProductIndex].image}
-              alt="product-image"
-              className="slider-image"
-            />
+            {products.length > 0 ? (
+              <img
+                src={products[currentProductIndex].image}
+                alt="product-image"
+                className="slider-image"
+              />
+            ) : (
+              <div>Loading...</div>
+            )}
             <div className="slider-navigation">
               <button className="slider-button" onClick={handlePrev}>Prev</button>
               <button className="slider-button" onClick={handleNext}>Next</button>
             </div>
           </div>
           <div className="slider-description">
-            <h3>{products[currentProductIndex].name}</h3>
-            <p>{products[currentProductIndex].description}</p>
-            <p className="slider-price">
-              {products[currentProductIndex].price}
-            </p>
-            <button className="add-to-cart">Add to Cart</button>
+            {products.length > 0 && (
+              <>
+                <h3>{products[currentProductIndex].name}</h3>
+                <p>{products[currentProductIndex].description}</p>
+                <p className="slider-price">
+                  {products[currentProductIndex].price}
+                </p>
+                <button className="add-to-cart">Add to Cart</button>
+              </>
+            )}
           </div>
         </motion.div>
       </div>
