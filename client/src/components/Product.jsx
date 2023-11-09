@@ -87,7 +87,7 @@ const Product = () => {
           <div className="slider-description">
             {products.length > 0 && (
               <>
-                <h3>{products[currentProductIndex].name}</h3>
+                <h3 className="product-name">{products[currentProductIndex].name}</h3>
                 <p>{products[currentProductIndex].description}</p>
                 <p className="slider-price">
                   {products[currentProductIndex].price}
