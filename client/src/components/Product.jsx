@@ -29,6 +29,8 @@ const Product = () => {
     setCurrentProductIndex((prevIndex) => (prevIndex + 1) % products.length);
   };
 
+ 
+
   return (
     <div className="products-wrapper">
       <div className="product-container-first">
