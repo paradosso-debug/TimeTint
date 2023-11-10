@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
+import { useCart } from '../context/CartContext'; 
 
 const Product = () => {
   const [products, setProducts] = useState([]);
   const [currentProductIndex, setCurrentProductIndex] = useState(0);
+  const { addToCart } = useCart(); // Destructure the addToCart function from the context for use
+
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -28,6 +31,7 @@ const Product = () => {
   const handleNext = () => {
     setCurrentProductIndex((prevIndex) => (prevIndex + 1) % products.length);
   };
+
 
  
 
@@ -94,7 +98,7 @@ const Product = () => {
                 <p className="slider-price">
                   {products[currentProductIndex].price}
                 </p>
-                <button className="add-to-cart">Add to Cart</button>
+                <button className="add-to-cart" onClick={addToCart}>Add to Cart</button>
               </>
             )}
           </div>
