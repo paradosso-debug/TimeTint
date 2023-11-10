@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 import {Icon} from '@iconify/react';
-import { useCart } from '../context/CartContext';
+import { useCart } from '../../context/CartContext';
 
 const Navbar = () => {
   const { cartCount } = useCart();
