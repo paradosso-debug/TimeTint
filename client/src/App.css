@@ -155,6 +155,11 @@
   padding-top: calc(40vh - 20px);
 }
 
+.product-container-second {
+  background-color: black; /* Right div background color */
+  color: white; /* Text color for the right div, since its background is black */
+}
+
 .product-left-container {
   height: calc(50vh - 20px);
   width: calc(100vh - 20px);
@@ -167,10 +172,6 @@
   padding-top: 1.5rem;
 }
 
-.product-container-second {
-  background-color: black; /* Right div background color */
-  color: white; /* Text color for the right div, since its background is black */
-}
 
 .reviews-container {
   display: flex;
@@ -254,12 +255,15 @@
 }
 
 .slider-button {
-  color: gray;
-  background-color: transparent;
+  color: white;
+  background-color: rgba(128, 128, 128, 0.624);
+  border-radius: 100%;
+  width: 2.0rem ;
   border: none;
   cursor: pointer;
-  font-size: medium;
+  font-size: x-large;
   margin-top: 1rem;
+  margin-left: 6px;
 }
 
 .slider-button:hover {
@@ -298,6 +302,33 @@
 .add-to-cart:hover {
   background-color: rgb(158, 159, 165);
 }
+
+.cart-wrapper {
+  display: flex; /* To lay out its children (the two divs) side by side */
+  height: 100vh; /* To ensure it takes the full width available */
+}
+
+.cart-container-first,
+.cart-container-second{
+  align-self: stretch; /* This will ensure both divs stretch vertically to fill the footer */
+  display: flex;
+  align-items: flex-start; /* This will push the content to the bottom of the divs */
+  color: black;
+  padding-top: 10rem;
+  text-decoration: none;
+  flex: 1; /* Each div will take up half of the space */
+}
+
+.cart-container-first {
+  padding-top: calc(40vh - 20px);
+}
+
+.cart-container-second {
+  background-color: black; /* Right div background color */
+  color: white; /* Text color for the right div, since its background is black */
+}
+
+
 
 /* Laptop Devices */
 @media (min-width: 1024px) and (max-width: 1440px) {

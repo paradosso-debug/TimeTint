@@ -86,8 +86,8 @@ const Product = () => {
               <div>Loading...</div>
             )}
             <div className="slider-navigation">
-              <button className="slider-button" onClick={handlePrev}>Prev</button>
-              <button className="slider-button" onClick={handleNext}>Next</button>
+              <button className="slider-button" onClick={handlePrev}>&lt;</button>
+              <button className="slider-button" onClick={handleNext}>&gt;</button>
             </div>
           </div>
           <div className="slider-description">

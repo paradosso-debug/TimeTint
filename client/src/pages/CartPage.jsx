@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 const CartPage = () => {
   return (
     <>
+    
       <Navbar />
       <Cart />
       <Footer />
