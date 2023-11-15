@@ -172,7 +172,6 @@
   padding-top: 1.5rem;
 }
 
-
 .reviews-container {
   display: flex;
   flex-direction: column; /* explicitly set to column */
@@ -258,7 +257,7 @@
   color: white;
   background-color: rgba(128, 128, 128, 0.624);
   border-radius: 100%;
-  width: 2.0rem ;
+  width: 2rem;
   border: none;
   cursor: pointer;
   font-size: x-large;
@@ -304,31 +303,94 @@
 }
 
 .cart-wrapper {
-  display: flex; /* To lay out its children (the two divs) side by side */
-  height: 100vh; /* To ensure it takes the full width available */
+  display: flex;
+  height: 100vh;
+  padding: 1px; /* Adds some padding around the content */
 }
 
-.cart-container-first,
-.cart-container-second{
-  align-self: stretch; /* This will ensure both divs stretch vertically to fill the footer */
-  display: flex;
-  align-items: flex-start; /* This will push the content to the bottom of the divs */
+.payment-form {
+  height: 60vh;
+}
+
+.cart-info-left {
+  margin: 10rem;
+  height: 100vh;
   color: black;
-  padding-top: 10rem;
-  text-decoration: none;
-  flex: 1; /* Each div will take up half of the space */
+  background-color: white;
+}
+
+.payment-details {
+  max-height: calc(
+    100vh - 100px
+  ); /* Adjust the 100px based on your header/footer size */
+  overflow-y: auto; /* Adds vertical scrollbar if content overflows */
+  padding: 10px; /* Padding for aesthetic spacing */
+  /* Add any other styles for the payment details container */
+}
+.card-details {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.shipping-details {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .cart-container-first {
-  padding-top: calc(40vh - 20px);
+  flex: 1; /* Takes up half of the space in the flex container */
+  background-color: white; /* Left div background color should be white */
+  color: black; /* Text color for the left div */
+  /* Other styling as needed */
 }
 
 .cart-container-second {
-  background-color: black; /* Right div background color */
-  color: white; /* Text color for the right div, since its background is black */
+  flex: 1; /* Takes up the remaining half of the space in the flex container */
+  background-color: black; /* Right div background color should be black */
+  color: white; /* Text color for the right div */
+  /* Other styling as needed */
+  height: 100vh;
 }
 
+.input-group {
+  background-color: white;
+  margin-bottom: 15px; /* Adds space between input groups */
+}
 
+.input-group label {
+  display: block;
+  margin-bottom: 10px; /* Adds a little space between label and input */
+}
+
+.double-input {
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-half {
+  flex: 1;
+  margin-right: 10px; /* Add some spacing between the inputs */
+}
+
+.input-half:last-child {
+  margin-right: 0; /* No margin on the right for the last input in a group */
+}
+
+.input-group input {
+  width: 100%; /* Full width of the container */
+  padding: 5px;
+  border-radius: 5px;
+  border: solid 1px gray;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px; /* Space above the button */
+}
 
 /* Laptop Devices */
 @media (min-width: 1024px) and (max-width: 1440px) {
