@@ -319,6 +319,81 @@
   background-color: white;
 }
 
+.cart-info-right {
+  display: flex; /* Changed from column to flex for proper alignment */
+  flex-direction: column; /* Added to keep column layout */
+  align-items: center;
+  margin-left: 55rem;
+  margin-top: 10rem;
+  padding: 15rem;
+  background-color: transparent; /* Keep it transparent for glass effect */
+  border-radius: 20px;
+  box-shadow: 0 0 0px transparent; /* Existing shadow kept as transparent */
+
+  /* Glassmorphism styles */
+  background: rgba(
+    255,
+    255,
+    255,
+    0.148
+  ); /* Semi-transparent white background */
+  backdrop-filter: blur(10px); /* Blur effect for the background */
+  -webkit-backdrop-filter: blur(10px); /* Fallback for Safari */
+  border: 0.1px solid rgba(255, 255, 255, 0.387); /* Light white border for more 'glass' effect */
+
+  /* Fixed position styles */
+  position: fixed; /* Added to fix the position */
+  top: 1rem; /* Distance from the top, adjust as needed */
+  left: 20rem; /* Distance from the left, adjust as needed */
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0; /* Light grey border for each item */
+  padding: 10px 0;
+}
+
+.cart-btn {
+  padding: 10px 20px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px; /* Space above the button */
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+
+.cart-item img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 20px;
+  border-radius: 5px;
+}
+
+.cart-item p {
+  margin: 0 10px;
+  color: #333; /* Dark grey text */
+}
+
+.order-summary {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.order-summary p {
+  margin: 5px 0;
+  font-size: 1.2em;
+}
+
+button:hover {
+  background-color: rgb(185, 143, 125);
+}
+
 .payment-details {
   max-height: calc(
     100vh - 100px
@@ -383,14 +458,6 @@
   border: solid 1px gray;
 }
 
-button {
-  padding: 10px 20px;
-  background-color: #000;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  margin-top: 20px; /* Space above the button */
-}
 
 /* Laptop Devices */
 @media (min-width: 1024px) and (max-width: 1440px) {

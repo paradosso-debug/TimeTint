@@ -98,7 +98,12 @@ const Product = () => {
                 <p className="slider-price">
                   {products[currentProductIndex].price}
                 </p>
-                <button className="add-to-cart" onClick={addToCart}>Add to Cart</button>
+                <button 
+            className="add-to-cart" 
+            onClick={() => addToCart(products[currentProductIndex])}
+          >
+            Add to Cart
+          </button>
               </>
             )}
           </div>

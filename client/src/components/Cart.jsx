@@ -1,6 +1,18 @@
 import React from "react";
+import { useCart } from "../context/CartContext";
 
 const Cart = () => {
+  const { cartItems } = useCart();
+
+  // Function to convert buffer to base64 string
+  const bufferToBase64 = (buffer) => {
+    return btoa(
+      new Uint8Array(buffer).reduce(
+        (data, byte) => data + String.fromCharCode(byte),
+        ""
+      )
+    );
+  };
   return (
     <>
       <div className="cart-wrapper">
@@ -83,15 +95,18 @@ const Cart = () => {
         </div>
 
         <div className="cart-container-second">
-          {/* Order Details */}
-          <h2>Order Details</h2>
-          {/* ...add product details here */}
-          {/* Order Summary */}
-          <div className="order-summary">
-            <p>Subtotal: $2558</p>
-            <p>Shipping: $5.90</p>
-            <p>Total: $2563.90</p>
-            <button type="submit">Confirm Your Order</button>
+          <div className="cart-info-right">
+            <h2>Order Details</h2>
+            {cartItems.map((item) => (
+              <div key={item._id}>
+
+                <img src={item.image} alt={item.name} />
+                <p>{item.name}</p>
+                <p>{item.description}</p>
+                <p>${item.price}</p>
+              </div>
+            ))}
+            {/* ...order summary... */}
           </div>
         </div>
       </div>
