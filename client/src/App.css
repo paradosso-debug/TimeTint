@@ -319,6 +319,8 @@
   background-color: white;
 }
 
+.h{background-color: red;}
+
 .cart-info-right {
   display: flex; /* Changed from column to flex for proper alignment */
   flex-direction: column; /* Added to keep column layout */

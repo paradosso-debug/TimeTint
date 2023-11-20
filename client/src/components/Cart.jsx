@@ -3,16 +3,12 @@ import { useCart } from "../context/CartContext";
 
 const Cart = () => {
   const { cartItems } = useCart();
-
+  
   // Function to convert buffer to base64 string
   const bufferToBase64 = (buffer) => {
-    return btoa(
-      new Uint8Array(buffer).reduce(
-        (data, byte) => data + String.fromCharCode(byte),
-        ""
-      )
-    );
+    return Buffer.from(buffer).toString('base64');
   };
+  
   return (
     <>
       <div className="cart-wrapper">
@@ -97,15 +93,11 @@ const Cart = () => {
         <div className="cart-container-second">
           <div className="cart-info-right">
             <h2>Order Details</h2>
-            {cartItems.map((item) => (
-              <div key={item._id}>
-
-                <img src={item.image} alt={item.name} />
-                <p>{item.name}</p>
-                <p>{item.description}</p>
-                <p>${item.price}</p>
-              </div>
+            <div className="h">
+            {cartItems.map((item)=>(
+              <img src={`data:image/jpeg;base64,${bufferToBase64(item.image.data)}`} alt={item.name} />
             ))}
+            </div>
             {/* ...order summary... */}
           </div>
         </div>
@@ -115,3 +107,14 @@ const Cart = () => {
 };
 
 export default Cart;
+
+
+// {cartItems.map((item) => (
+//   <div key={item._id}>
+
+//     <img src={item.image} alt={item.name} />
+//     <p>{item.name}</p>
+//     <p>{item.description}</p>
+//     <p>${item.price}</p>
+//   </div>
+// ))}
