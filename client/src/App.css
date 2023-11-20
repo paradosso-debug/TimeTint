@@ -429,6 +429,8 @@ button:hover {
   height: 100vh;
 }
 
+.cart-item{background-color: red;}
+
 .input-group {
   background-color: white;
   margin-bottom: 15px; /* Adds space between input groups */

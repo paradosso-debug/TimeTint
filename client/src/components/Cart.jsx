@@ -1,14 +1,9 @@
 import React from "react";
-import { useCart } from "../context/CartContext";
+import {useCart} from '../context/CartContext'
 
 const Cart = () => {
-  const { cartItems } = useCart();
-  
-  // Function to convert buffer to base64 string
-  const bufferToBase64 = (buffer) => {
-    return Buffer.from(buffer).toString('base64');
-  };
-  
+  const { cartItems } = useCart(); // Access cartItems from context
+
   return (
     <>
       <div className="cart-wrapper">
@@ -93,21 +88,22 @@ const Cart = () => {
         <div className="cart-container-second">
           <div className="cart-info-right">
             <h2>Order Details</h2>
-            <div className="h">
-            {cartItems.map((item)=>(
-              <img src={`data:image/jpeg;base64,${bufferToBase64(item.image.data)}`} alt={item.name} />
-            ))}
+            {cartItems.map((item) => (
+           <div key={item._id} className="cart-item">
+           <img src={item.image} alt={item.name} />
+           <p>{item.name}</p>
+              <p>{item.description}</p>
+              <p>${item.price}</p>
+              </div>
+               ))}
             </div>
-            {/* ...order summary... */}
           </div>
         </div>
-      </div>
     </>
   );
 };
 
 export default Cart;
-
 
 // {cartItems.map((item) => (
 //   <div key={item._id}>
