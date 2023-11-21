@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignUp from "./pages/SignUp";
@@ -10,7 +10,7 @@ import { CartProvider } from "../context/CartContext";
 const App = () => {
   return (
     <BrowserRouter>
-      <CartProvider>
+      <CartProvider> {/* Wrap your routes with CartProvider */}
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
@@ -24,3 +24,6 @@ const App = () => {
 };
 
 export default App;
+
+
+

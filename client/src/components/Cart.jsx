@@ -1,8 +1,9 @@
-import React from "react";
-import {useCart} from '../context/CartContext'
+import React, { useState } from "react";
+import { useCart } from "../context/CartContext.jsx";
 
 const Cart = () => {
-  const { cartItems } = useCart(); // Access cartItems from context
+  const { cartItems } = useCart();
+  
 
   return (
     <>
@@ -88,17 +89,21 @@ const Cart = () => {
         <div className="cart-container-second">
           <div className="cart-info-right">
             <h2>Order Details</h2>
-            {cartItems.map((item) => (
-           <div key={item._id} className="cart-item">
-           <img src={item.image} alt={item.name} />
-           <p>{item.name}</p>
-              <p>{item.description}</p>
-              <p>${item.price}</p>
+            {cartItems.length > 0 ? (
+            cartItems.map((item) => (
+              <div key={item._id}>
+                <img src={item.image} alt={item.name} />
+                <p>{item.name}</p>
+                <p>{item.description}</p>
+                <p>${item.price}</p>
               </div>
-               ))}
-            </div>
+                ))
+                ) : (
+                  <p>Your cart is empty.</p>
+                  )}
           </div>
         </div>
+      </div>
     </>
   );
 };
