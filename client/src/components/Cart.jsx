@@ -3,7 +3,15 @@ import { useCart } from "../context/CartContext.jsx";
 
 const Cart = () => {
   const { cartItems } = useCart();
-  
+
+  function bufferToBase64(buf) {
+    let binstr = Array.prototype.map
+      .call(buf, function (ch) {
+        return String.fromCharCode(ch);
+      })
+      .join("");
+    return btoa(binstr);
+  }
 
   return (
     <>
@@ -87,35 +95,28 @@ const Cart = () => {
         </div>
 
         <div className="cart-container-second">
-          <div className="cart-info-right">
-            <h2>Order Details</h2>
-            {cartItems.length > 0 ? (
+        <div className="cart-info-right">
+          <h2>Order Details</h2>
+          {cartItems && cartItems.length > 0 ? (
             cartItems.map((item) => (
               <div key={item._id}>
-                <img src={item.image} alt={item.name} />
+                <img
+                  src={`data:${item.image.contentType};base64,${bufferToBase64(item.image.data)}`}
+                  alt={item.name}
+                />
                 <p>{item.name}</p>
                 <p>{item.description}</p>
                 <p>${item.price}</p>
+                <p>Quantity: {item.quantity}</p>
               </div>
-                ))
-                ) : (
-                  <p>Your cart is empty.</p>
-                  )}
-          </div>
+            ))
+          ) : (
+            <p>No items in the cart</p>
+          )}
         </div>
       </div>
-    </>
-  );
-};
-
+    </div>
+  </>
+);
+          }
 export default Cart;
-
-// {cartItems.map((item) => (
-//   <div key={item._id}>
-
-//     <img src={item.image} alt={item.name} />
-//     <p>{item.name}</p>
-//     <p>{item.description}</p>
-//     <p>${item.price}</p>
-//   </div>
-// ))}
