@@ -1,10 +1,12 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 import {Icon} from '@iconify/react';
-import { useCart } from '../../context/CartContext';
+import { useCart } from '../context/CartContext';
 
 const Navbar = () => {
-  const { cartCount } = useCart();
+ 
+    const { cartItems } = useCart();
+    const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <>
@@ -16,10 +18,10 @@ const Navbar = () => {
             <Link to='/sign-up' className='nav-links'>Register</Link>
             <Link to='/products' className='nav-links'>Products</Link>
             <div className='cart-icon'>
-          <Link to='/cart'>
-            <Icon icon='solar:cart-5-line-duotone' color='white'></Icon>
-            {cartCount > 0 && <span className="cart-count">{cartCount}</span>} {/* Display the cart count if it is greater than 0 */}
-          </Link>
+            <Link to='/cart'>
+        <Icon icon='solar:cart-5-line-duotone' color='white'></Icon>
+        {totalItems > 0 && <span className="cart-count">{totalItems}</span>}
+      </Link>
         </div>
     </header>
     </>

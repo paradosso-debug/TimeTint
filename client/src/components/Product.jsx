@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
-import { useCart } from '../../context/CartContext.jsx'; 
+import { useCart } from '../context/CartContext.jsx'; 
 
 const Product = () => {
   const [products, setProducts] = useState([]);
@@ -13,6 +13,9 @@ const Product = () => {
     const product = products[currentProductIndex];
     addToCart(product);
   };
+
+ 
+
 
 
   useEffect(() => {

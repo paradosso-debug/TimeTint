@@ -5,7 +5,7 @@ import LoginPage from "./pages/LoginPage";
 import SignUp from "./pages/SignUp";
 import ProductsPage from "./pages/ProductsPage";
 import CartPage from "./pages/CartPage";
-import { CartProvider } from "../context/CartContext";
+import { CartProvider } from "./context/CartContext";
 
 const App = () => {
   return (
