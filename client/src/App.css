@@ -319,42 +319,110 @@
   background-color: white;
 }
 
-.h{background-color: red;}
+.cart-container-second {
+  flex: 1;
+  background-color: black;
+  color: rgb(185, 143, 125);
+  height: 100vh; /* Ensures the minimum height is the full viewport height */
+  display: flex; /* This will allow you to use flex properties to align children */
+  flex-direction: column; /* Aligns the children in a column */
+  align-items: center; /* Centers the children horizontally */
+  justify-content: flex-start; /* Aligns children to the top */
 
-.cart-info-right {
-  display: flex; /* Changed from column to flex for proper alignment */
-  flex-direction: column; /* Added to keep column layout */
-  align-items: center;
-  margin-left: 55rem;
-  margin-top: 10rem;
-  padding: 15rem;
-  background-color: transparent; /* Keep it transparent for glass effect */
-  border-radius: 20px;
-  box-shadow: 0 0 0px transparent; /* Existing shadow kept as transparent */
-
-  /* Glassmorphism styles */
-  background: rgba(
-    255,
-    255,
-    255,
-    0.148
-  ); /* Semi-transparent white background */
-  backdrop-filter: blur(10px); /* Blur effect for the background */
-  -webkit-backdrop-filter: blur(10px); /* Fallback for Safari */
-  border: 0.1px solid rgba(255, 255, 255, 0.387); /* Light white border for more 'glass' effect */
-
-  /* Fixed position styles */
-  position: fixed; /* Added to fix the position */
-  top: 1rem; /* Distance from the top, adjust as needed */
-  left: 20rem; /* Distance from the left, adjust as needed */
 }
 
-.cart-item {
+
+/* Existing styles */
+.cart-image {
+  height: 12rem;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  margin-top: 2rem;
+  border-radius: 2rem;
+  background-color: black;
+}
+
+.cart-image-single{
+  height: 20rem;
+}
+
+
+
+
+.cart-info-right div.single-item {
+  /* New styles for a single item */
   display: flex;
+  flex-direction: column;
   align-items: center;
-  border-bottom: 1px solid #e0e0e0; /* Light grey border for each item */
-  padding: 10px 0;
+  justify-content: center;
+  margin-top: 15rem;
+
 }
+
+
+.cart-info-right div.two-items{
+  display: inline-block;
+  align-items: center;
+  height: 20rem;
+  width: 15rem;
+  margin-top: 20rem;
+  margin-left: 3rem;
+  margin-right: 6rem;
+}
+
+
+.cart-info-right div.four-items{
+  display: inline-block;
+  align-items: center;
+  height: 20rem;
+  width: 15rem;
+  margin-top: 10rem;
+  margin-left: 7rem;
+  margin-right: 2rem;
+}
+
+.cart-info-right div.five-or-more-items {
+  display: inline-block;
+  align-items: center;
+  height: 20rem;
+  width: 15rem;
+  margin-left: 3rem;
+  margin-right: 1px;
+  margin-top: .5rem;
+ 
+
+}
+
+.multiple-items{
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+
+}
+
+
+.info-single{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-right: 7rem;
+  margin-top: 1rem;
+  font-size: large;
+  
+}
+
+/* New style for flex column layout */
+.cart-info-right div > .cart-items-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 7rem;
+  
+}
+
+
 
 .cart-btn {
   padding: 10px 20px;
@@ -421,13 +489,7 @@ button:hover {
   /* Other styling as needed */
 }
 
-.cart-container-second {
-  flex: 1; /* Takes up the remaining half of the space in the flex container */
-  background-color: black; /* Right div background color should be black */
-  color: white; /* Text color for the right div */
-  /* Other styling as needed */
-  height: 100vh;
-}
+
 
 
 

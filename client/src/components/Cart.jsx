@@ -4,8 +4,6 @@ import { useCart } from "../context/CartContext.jsx";
 const Cart = () => {
   const { cartItems } = useCart();
 
-
-
   return (
     <>
       <div className="cart-wrapper">
@@ -92,12 +90,65 @@ const Cart = () => {
             <h2>Order Details</h2>
             {cartItems && cartItems.length > 0 ? (
               cartItems.map((item) => (
-                <div key={item._id}>
-                  <img src={item.image} alt={item.name} />
-                  <p>{item.name}</p>
-                  <p>{item.description}</p>
-                  <p>${item.price}</p>
-                  <p>Quantity: {item.quantity}</p>
+                <div
+                  key={item._id}
+                  className={
+                    cartItems.length === 1
+                      ? "single-item"
+                      : cartItems.length === 2
+                      ? "two-items"
+                      : cartItems.length === 4
+                      ? "four-items"
+                      : cartItems.length === 5
+                      ? "five-or-more-items"
+                      : cartItems.length === 6
+                      ? "five-or-more-items"
+                      : cartItems.length === 7
+                      ? "five-or-more-items"
+                      : cartItems.length === 8
+                      ? "five-or-more-items"
+                      : cartItems.length === 9
+                      ? "five-or-more-items"
+                      : "multiple-items"
+                  }
+                >
+                  <img
+                    className={`cart-image ${
+                      cartItems.length === 1
+                        ? "cart-image-single"
+                        : "cart-image-multiple"
+                    }`}
+                    src={item.image}
+                    alt={item.name}
+                  />
+                  <p
+                    className={`cart-items-info ${
+                      cartItems.length === 1 ? "info-single" : "info-multiple"
+                    }`}
+                  >
+                    Name: {item.name}
+                  </p>
+                  <p
+                    className={`cart-items-info ${
+                      cartItems.length === 1 ? "info-single" : "info-multiple"
+                    }`}
+                  >
+                    {item.description}
+                  </p>
+                  <p
+                    className={`cart-items-info ${
+                      cartItems.length === 1 ? "info-single" : "info-multiple"
+                    }`}
+                  >
+                    {item.price}
+                  </p>
+                  <p
+                    className={`cart-items-info ${
+                      cartItems.length === 1 ? "info-single" : "info-multiple"
+                    }`}
+                  >
+                    Quantity: {item.quantity}
+                  </p>
                 </div>
               ))
             ) : (

@@ -1,31 +1,38 @@
 import React, { createContext, useContext, useState } from "react";
 
 // Create a new Context for the cart
-const CartContext = createContext();
+const CartContext = createContext({ cartItems: [], addToCart: () => {} });
 
 // Custom hook to use the CartContext
 export const useCart = () => useContext(CartContext);
 
-export const CartProvider = ({ children }) => {
+// Provider component that wraps your app and makes the cart context available to any child component that calls useCart().
+export const CartProvider = ({ children}) => {
   const [cartItems, setCartItems] = useState([]);
 
-  const addToCart = (newItem) => {
-    setCartItems(prevItems => {
-      // Check if the item already exists in the cart
-      const existingItem = prevItems.find(item => item._id === newItem._id);
-      if (existingItem) {
-        // If exists, increase the quantity
-        return prevItems.map(item =>
-          item._id === newItem._id ? { ...item, quantity: item.quantity + 1 } : item
-        );
+
+  // Function to add an item to the cart
+  const addToCart = (product) => {
+    setCartItems((prevItems) => {
+      const productIndex = prevItems.findIndex(item => item._id === product._id);
+      if (productIndex !== -1) {
+        // Product exists, update quantity
+        const updatedCartItems = [...prevItems];
+        updatedCartItems[productIndex] = {
+          ...updatedCartItems[productIndex],
+          quantity: updatedCartItems[productIndex].quantity + 1
+        };
+        return updatedCartItems;
       } else {
-        // If not, add the new item with a quantity of 1
-        return [...prevItems, { ...newItem, quantity: 1 }];
+        // Product does not exist, add new item with quantity 1
+        return [...prevItems, { ...product, quantity: 1 }];
       }
     });
   };
+  
+  
 
-  // Provide both cartItems and addToCart to the context
+  // The provider passes down the cartItems and the addToCart function to all children
   return (
     <CartContext.Provider value={{ cartItems, addToCart }}>
       {children}
