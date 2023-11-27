@@ -10,6 +10,11 @@ export const useCart = () => useContext(CartContext);
 export const CartProvider = ({ children}) => {
   const [cartItems, setCartItems] = useState([]);
 
+ // Function to remove an item from the cart
+ const removeFromCart = (itemId) => {
+  setCartItems(currentItems => currentItems.filter(item => item._id !== itemId));
+};
+
 
   // Function to add an item to the cart
   const addToCart = (product) => {
@@ -34,7 +39,7 @@ export const CartProvider = ({ children}) => {
 
   // The provider passes down the cartItems and the addToCart function to all children
   return (
-    <CartContext.Provider value={{ cartItems, addToCart }}>
+    <CartContext.Provider value={{ cartItems, addToCart,removeFromCart }}>
       {children}
     </CartContext.Provider>
   );

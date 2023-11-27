@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import { useCart } from "../context/CartContext.jsx";
 
 const Cart = () => {
-  const { cartItems } = useCart();
+  const { cartItems, removeFromCart  } = useCart();
 
+  const handleRemove = (itemId) => {
+    // Call a method to remove the item from the cart
+    removeFromCart(itemId);
+  }
   return (
     <>
       <div className="cart-wrapper">
@@ -149,8 +153,9 @@ const Cart = () => {
                   >
                     Quantity: {item.quantity}
                   </p>
+                  <button onClick={() => handleRemove(item._id)}>Remove</button>
                 </div>
-              ))
+  ))
             ) : (
               <p>No items in the cart</p>
             )}
