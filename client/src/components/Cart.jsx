@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { useCart } from "../context/CartContext.jsx";
 
 const Cart = () => {
-  const { cartItems, removeFromCart  } = useCart();
+  const { cartItems, removeFromCart } = useCart();
 
   const handleRemove = (itemId) => {
     // Call a method to remove the item from the cart
     removeFromCart(itemId);
-  }
+  };
   return (
     <>
       <div className="cart-wrapper">
@@ -101,6 +101,8 @@ const Cart = () => {
                       ? "single-item"
                       : cartItems.length === 2
                       ? "two-items"
+                      : cartItems.length === 3
+                      ? "three-items"
                       : cartItems.length === 4
                       ? "four-items"
                       : cartItems.length === 5
@@ -120,6 +122,8 @@ const Cart = () => {
                     className={`cart-image ${
                       cartItems.length === 1
                         ? "cart-image-single"
+                        : cartItems.length === 2
+                        ? "cart-image-two"
                         : "cart-image-multiple"
                     }`}
                     src={item.image}
@@ -127,35 +131,90 @@ const Cart = () => {
                   />
                   <p
                     className={`cart-items-info ${
-                      cartItems.length === 1 ? "info-single" : "info-multiple"
+                      cartItems.length === 1
+                        ? "info-item-single"
+                        : cartItems.length === 2
+                        ? "info-item-two"
+                        : cartItems.length === 3
+                        ? "info-item-three"
+                        : cartItems.length === 4
+                        ? "info-item-four"
+                        : "info-multiple"
                     }`}
                   >
                     Name: {item.name}
                   </p>
                   <p
                     className={`cart-items-info ${
-                      cartItems.length === 1 ? "info-single" : "info-multiple"
+                      cartItems.length === 1
+                        ? "info-item-single"
+                        : cartItems.length === 2
+                        ? "info-item-two"
+                        : cartItems.length === 3
+                        ? "info-item-three"
+                        : cartItems.length === 4
+                        ? "info-item-four"
+                        : "info-multiple"
                     }`}
                   >
                     {item.description}
                   </p>
                   <p
                     className={`cart-items-info ${
-                      cartItems.length === 1 ? "info-single" : "info-multiple"
+                      cartItems.length === 1
+                        ? "info-item-single"
+                        : cartItems.length === 2
+                        ? "info-item-two"
+                        : cartItems.length === 3
+                        ? "info-item-three"
+                        : cartItems.length === 4
+                        ? "info-item-four"
+                        : "info-multiple"
                     }`}
                   >
                     {item.price}
                   </p>
                   <p
                     className={`cart-items-info ${
-                      cartItems.length === 1 ? "info-single" : "info-multiple"
+                      cartItems.length === 1
+                        ? "info-item-single"
+                        : cartItems.length === 2
+                        ? "info-item-two"
+                        : cartItems.length === 3
+                        ? "info-item-three"
+                        : cartItems.length === 4
+                        ? "info-item-four"
+                        : "info-multiple"
                     }`}
                   >
                     Quantity: {item.quantity}
                   </p>
-                  <button onClick={() => handleRemove(item._id)}>Remove</button>
+                  <button
+                    className={`remove-item-btn ${
+                      cartItems.length === 1
+                        ? "remove-item-btn-single"
+                        : cartItems.length === 2
+                        ? "remove-item-btn-two"
+                        : cartItems.length === 4
+                        ? "remove-item-btn-multiple"
+                        : cartItems.length === 5
+                        ? "remove-item-btn-multiple"
+                        : cartItems.length === 6
+                        ? "remove-item-btn-multiple"
+                        : cartItems.length === 7
+                        ? "remove-item-btn-multiple"
+                        : cartItems.length === 8
+                        ? "remove-item-btn-multiple"
+                        : cartItems.length === 9
+                        ? "remove-item-btn-multiple"
+                        : "remove-item-default"
+                    }`}
+                    onClick={() => handleRemove(item._id)}
+                  >
+                    Remove
+                  </button>
                 </div>
-  ))
+              ))
             ) : (
               <p>No items in the cart</p>
             )}

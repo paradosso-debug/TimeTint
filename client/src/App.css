@@ -287,6 +287,60 @@
   color: rgb(185, 143, 125);
 }
 
+.remove-item-btn-single {
+  margin-top: 25px!important;
+  margin-left: 5rem!important;
+  padding: 9px 16px;
+  background-color: white;
+  color: black;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 2rem;
+}
+
+.remove-item-btn-two {
+  margin-top: 20px;
+  margin-left: 13rem!important;
+  padding: 8px 18px;
+  background-color: white;
+  color: black;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 2rem;
+}
+
+/* this one works for 3 items */
+.remove-item-btn {
+  margin-top: 10px;
+  margin-left: 7rem;
+  margin-right: 6.5rem;
+  padding: 9px 19px;
+  background-color: white;
+  color: black;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 2rem;
+}
+
+.remove-item-btn-multiple {
+  margin-top: 20px;
+  margin-left:7.6rem;
+  padding: 9px 19px;
+  background-color: white;
+  color: black;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 2rem;
+}
+
+.remove-item-btn:hover {
+  background-color: rgb(158, 159, 165);
+}
+
 .add-to-cart {
   margin-top: 15px;
   padding: 10px 20px;
@@ -328,9 +382,7 @@
   flex-direction: column; /* Aligns the children in a column */
   align-items: center; /* Centers the children horizontally */
   justify-content: flex-start; /* Aligns children to the top */
-
 }
-
 
 /* Existing styles */
 .cart-image {
@@ -342,12 +394,19 @@
   background-color: black;
 }
 
-.cart-image-single{
+.cart-image-single {
   height: 20rem;
 }
 
+.cart-image-two {
+  height: 20rem;
+}
 
-
+.multiple-items {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
 
 .cart-info-right div.single-item {
   /* New styles for a single item */
@@ -356,22 +415,19 @@
   align-items: center;
   justify-content: center;
   margin-top: 15rem;
-
+  height: 20rem;
 }
 
-
-.cart-info-right div.two-items{
+.cart-info-right div.two-items {
   display: inline-block;
   align-items: center;
-  height: 20rem;
-  width: 15rem;
-  margin-top: 20rem;
-  margin-left: 3rem;
-  margin-right: 6rem;
+  width: 22rem;
+  margin-top: 15rem;
+  margin-left: 2rem;
+  margin-right: 7rem;
 }
 
-
-.cart-info-right div.four-items{
+.cart-info-right div.four-items {
   display: inline-block;
   align-items: center;
   height: 20rem;
@@ -388,41 +444,70 @@
   width: 15rem;
   margin-left: 3rem;
   margin-right: 1px;
-  margin-top: .5rem;
- 
-
+  margin-top: 0.5rem;
 }
 
-.multiple-items{
-  display: flex;
-  flex-direction: column;
-  margin-top: 2rem;
-
-}
-
-
-.info-single{
+.cart-info-right div > .info-item-single {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  margin-right: 7rem;
+  margin-right: 2rem;
   margin-top: 1rem;
-  font-size: large;
-  
+  font-size: medium !important;
+}
+
+.cart-info-right div > .info-item-two{
+ 
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  margin-right: -9rem;
+  font-size: medium !important;
+}
+
+.cart-info-right div > .info-item-four {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  margin-right: -5rem;
 }
 
 /* New style for flex column layout */
-.cart-info-right div > .cart-items-info {
+.cart-info-right div > .info-item-three {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: flex-start;
-  margin-left: 7rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  font-size: small;
+  padding-top: 2px;
+}
+
+.cart-info-right div > .cart-items-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 1rem;
+  font-size: small;
   
 }
 
+.info-multiple {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
 
+  margin-right: -4rem;
+  font-size: small;
+  padding-top: 2px;
+  
+}
 
 .cart-btn {
   padding: 10px 20px;
@@ -435,7 +520,6 @@
   border-radius: 5px;
   font-size: 1em;
 }
-
 
 .cart-item img {
   width: 100px;
@@ -489,10 +573,6 @@ button:hover {
   /* Other styling as needed */
 }
 
-
-
-
-
 .input-group {
   background-color: white;
   margin-bottom: 15px; /* Adds space between input groups */
@@ -523,7 +603,6 @@ button:hover {
   border-radius: 5px;
   border: solid 1px gray;
 }
-
 
 /* Laptop Devices */
 @media (min-width: 1024px) and (max-width: 1440px) {
