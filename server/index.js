@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import reviewsRouter from "./routes/reviews.js";
 import productRouter from "./routes/product.js";
+import paymentRouter from "./routes/paymentRoutes.js";
 
 dotenv.config();
 
@@ -27,8 +28,10 @@ mongoose.connection.on("error", (err) => {
   console.error(`Error connecting to MongoDB: ${err}`);
 });
 
+// Mount your routes
 app.use("/api/reviews", reviewsRouter);
 app.use("/api/products", productRouter);
+app.use("/api", paymentRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello, World!");

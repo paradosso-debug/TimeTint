@@ -1,93 +1,79 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useCart } from "../context/CartContext.jsx";
+import DropIn from 'braintree-web-drop-in-react';
+import axios from "axios";
 
 const Cart = () => {
   const { cartItems, removeFromCart } = useCart();
+  const [clientToken, setClientToken] = useState("");
+  const [instance, setInstance] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(""); // Added for error handling
 
   const handleRemove = (itemId) => {
-    // Call a method to remove the item from the cart
     removeFromCart(itemId);
   };
+
+  // Fetch payment gateway token
+  const getToken = async () => {
+    try {
+      setLoading(true); // Set loading to true while fetching
+      const { data } = await axios.get('/api/getToken'); // Assuming proxy setup for the API
+      setClientToken(data?.clientToken);
+    } catch (error) {
+      console.error(error);
+      setError("Failed to fetch payment token"); // Set error for user feedback
+    } finally {
+      setLoading(false); // Reset loading state after fetch
+    }
+  };
+
+  useEffect(() => {
+    getToken();
+  }, []); // Add dependencies if needed
+
+  // Handle payments
+  const handlePayment = async (event) => {
+    event.preventDefault();
+    if (!instance) {
+      setError("Payment instance not loaded");
+      return;
+    }
+    // Payment process implementation
+    try {
+      setLoading(true); // Indicate loading during payment process
+      // Call instance.requestPaymentMethod() and send data to your server
+      // Handle server response
+    } catch (error) {
+      console.error(error);
+      setError("Payment failed"); // Set error for user feedback
+    } finally {
+      setLoading(false); // Reset loading state after payment attempt
+    }
+  };
+
+
   return (
     <>
       <div className="cart-wrapper">
         <div className="cart-container-first">
           <div className="cart-info-left">
-            <div className="payment-details">
-              <h1>Payment Details</h1>
-              <h2 className="card-details">Card Details</h2>
-              <form className="payment-form">
-                <div className="input-group">
-                  <label htmlFor="name">Name</label>
-                  <input type="text" id="name" name="name" required />
-                </div>
-                <div className="input-group">
-                  <label htmlFor="cardNumber">Card Number</label>
-                  <input
-                    type="text"
-                    id="cardNumber"
-                    name="cardNumber"
-                    required
-                  />
-                </div>
-                <div className="input-group double-input">
-                  <div className="input-half">
-                    <label htmlFor="expirationDate">Expiration Date</label>
-                    <input
-                      type="text"
-                      id="expirationDate"
-                      name="expirationDate"
-                      required
-                    />
-                  </div>
-                  <div className="input-half">
-                    <label htmlFor="cvc">CVC</label>
-                    <input type="text" id="cvc" name="cvc" required />
-                  </div>
-                </div>
-                <h2 className="shipping-details">Shipping Details</h2>
-                <div className="input-group double-input">
-                  <div className="input-half">
-                    <label htmlFor="name">Name</label>
-                    <input type="text" id="name" name="name" required />
-                  </div>
-                  <div className="input-half">
-                    <label htmlFor="mobilenumber">Mobile Number</label>
-                    <input
-                      type="text"
-                      id="mobilenumber"
-                      name="mobilenumber"
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="input-group">
-                  <label htmlFor="email">Email</label>
-                  <input type="text" id="email" name="email" required />
-                </div>
-
-                <div className="input-group">
-                  <label htmlFor="address">Address</label>
-                  <input type="text" id="address" name="address" required />
-                </div>
-                <div className="input-group double-input">
-                  <div className="input-half">
-                    <label htmlFor="city">City</label>
-                    <input type="text" id="city" name="city" required />
-                  </div>
-                  <div className="input-half">
-                    <label htmlFor="zip">ZIP</label>
-                    <input type="text" id="zip" name="zip" required />
-                  </div>
-                </div>
-                <div className="input-group">
-                  <label htmlFor="country">Country</label>
-                  <input type="text" id="country" name="country" required />
-                </div>
+          <h1>Payment Details</h1>
+            {loading && <p>Loading...</p>}
+            {error && <p>Error: {error}</p>}
+            {clientToken && (
+              <form onSubmit={handlePayment}>
+                <DropIn
+                  options={{ authorization: clientToken, paypal: { flow: 'vault' } }}
+                  onInstance={instance => setInstance(instance)}
+                />
+                <button type="submit">Make Payment</button>
               </form>
+             )}
             </div>
-          </div>
-        </div>
+      </div>
+   
+
 
         <div className="cart-container-second">
           <div className="cart-info-right">
@@ -225,3 +211,64 @@ const Cart = () => {
   );
 };
 export default Cart;
+
+
+// fetch("/payment/getToken", {
+//   method: "GET",
+//   headers: {
+//     'Cache-Control': 'no-cache'
+//   }
+// })
+// .then(response => response.text())
+// .then(token => setClientToken(token))
+// .catch(err => console.log(err));
+
+// const handleRemove = (itemId) => {
+//   removeFromCart(itemId);
+// };
+
+// const handlePayment = (event) => {
+//   event.preventDefault();
+//   if (!instance) {
+//     console.error('Payment instance not loaded');
+//     return;
+//   }
+//   setProcessing(true);
+
+//   // Calculate total cart value
+//   const totalAmount = cartItems.reduce((total, item) => {
+//     return total + (parseFloat(item.price) * item.quantity);
+//   }, 0).toFixed(2);
+
+//   instance.requestPaymentMethod().then(({ nonce }) => {
+//     // Send nonce and total amount to your server for processing
+//     fetch("/payment/process", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({ paymentMethodNonce: nonce, amount: totalAmount }),
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//       if (data.success) {
+//         // Payment processed successfully
+//         console.log("Payment Success:", data);
+//         // TODO: Clear cart and show success message
+//       } else {
+//         // Payment failed
+//         console.log("Payment Failed:", data);
+//         // TODO: Show error message
+//       }
+//       setProcessing(false);
+//     })
+//     .catch(err => {
+//       console.error("Payment Error:", err);
+//       setProcessing(false);
+//     });
+//   })
+//   .catch(err => {
+//     console.error("Payment Method Error:", err);
+//     setProcessing(false);
+//   });
+// };

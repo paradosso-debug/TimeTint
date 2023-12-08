@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import { useCart } from '../context/CartContext.jsx'; 
 
+
+
 const Product = () => {
   const [products, setProducts] = useState([]);
   const [currentProductIndex, setCurrentProductIndex] = useState(0);
@@ -24,7 +26,8 @@ const Product = () => {
         const response = await axios.get("http://localhost:5001/api/products");
         setProducts(response.data);
       } catch (error) {
-        console.error("Error fetching products", error.response);
+        console.error("Error fetching products", error.message);
+        console.log(error); // This will log the entire error object
       }
     };
 

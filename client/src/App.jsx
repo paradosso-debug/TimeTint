@@ -10,7 +10,7 @@ import { CartProvider } from "./context/CartContext";
 const App = () => {
   return (
     <BrowserRouter>
-      <CartProvider> {/* Wrap your routes with CartProvider */}
+      <CartProvider> 
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
