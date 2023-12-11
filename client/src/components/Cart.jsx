@@ -1,79 +1,85 @@
-import React, { useState, useEffect } from "react";
-import { useCart } from "../context/CartContext.jsx";
+import React, { useState, useEffect } from 'react';
+import { useCart } from '../context/CartContext.jsx';
 import DropIn from 'braintree-web-drop-in-react';
-import axios from "axios";
+import axios from 'axios';
 
 const Cart = () => {
   const { cartItems, removeFromCart } = useCart();
-  const [clientToken, setClientToken] = useState("");
+  const [clientToken, setClientToken] = useState('');
   const [instance, setInstance] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(""); // Added for error handling
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const getToken = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get('http://localhost:5001/api/payment/getToken');
+        console.log('Token response:', response); // Added for debugging
+        setClientToken(response.data); 
+      } catch (err) {
+        console.error('Error fetching token:', err);
+        setError('Failed to fetch payment token');
+      } finally {
+        setLoading(false);
+      }
+    };
+    getToken();
+  }, []);
 
   const handleRemove = (itemId) => {
     removeFromCart(itemId);
   };
 
-  // Fetch payment gateway token
-  const getToken = async () => {
-    try {
-      setLoading(true); // Set loading to true while fetching
-      const { data } = await axios.get('/api/getToken'); // Assuming proxy setup for the API
-      setClientToken(data?.clientToken);
-    } catch (error) {
-      console.error(error);
-      setError("Failed to fetch payment token"); // Set error for user feedback
-    } finally {
-      setLoading(false); // Reset loading state after fetch
-    }
-  };
-
-  useEffect(() => {
-    getToken();
-  }, []); // Add dependencies if needed
-
-  // Handle payments
   const handlePayment = async (event) => {
     event.preventDefault();
     if (!instance) {
-      setError("Payment instance not loaded");
+      setError('Payment instance not loaded');
       return;
     }
-    // Payment process implementation
+
     try {
-      setLoading(true); // Indicate loading during payment process
-      // Call instance.requestPaymentMethod() and send data to your server
-      // Handle server response
-    } catch (error) {
-      console.error(error);
-      setError("Payment failed"); // Set error for user feedback
+      setLoading(true);
+      const payload = await instance.requestPaymentMethod();
+      console.log('Payment method payload:', payload); // Added for debugging
+      // Here, send payload.nonce to your server
+      // ...
+    } catch (err) {
+      console.error('Error processing payment:', err);
+      setError('Payment failed');
     } finally {
-      setLoading(false); // Reset loading state after payment attempt
+      setLoading(false);
     }
   };
 
+  console.log('Client Token:', clientToken); // This should print the actual token string
+  console.log('Error:', error); // This should be empty if there's no error
+  console.log('Loading:', loading); // This should be false if it's not loading
+  
 
   return (
     <>
       <div className="cart-wrapper">
         <div className="cart-container-first">
           <div className="cart-info-left">
-          <h1>Payment Details</h1>
+            <h1 >Payment Details</h1>
             {loading && <p>Loading...</p>}
             {error && <p>Error: {error}</p>}
             {clientToken && (
-              <form onSubmit={handlePayment}>
+              <form  onSubmit={handlePayment}>
                 <DropIn
-                  options={{ authorization: clientToken, paypal: { flow: 'vault' } }}
-                  onInstance={instance => setInstance(instance)}
+              
+                  options={{
+                    authorization: clientToken,
+                    paypal: { flow: "vault" },
+                  }}
+                  onInstance={(instance) => setInstance(instance)}
                 />
                 <button type="submit">Make Payment</button>
               </form>
-             )}
-            </div>
-      </div>
-   
-
+            )}
+          </div>
+        </div>
 
         <div className="cart-container-second">
           <div className="cart-info-right">
@@ -211,64 +217,3 @@ const Cart = () => {
   );
 };
 export default Cart;
-
-
-// fetch("/payment/getToken", {
-//   method: "GET",
-//   headers: {
-//     'Cache-Control': 'no-cache'
-//   }
-// })
-// .then(response => response.text())
-// .then(token => setClientToken(token))
-// .catch(err => console.log(err));
-
-// const handleRemove = (itemId) => {
-//   removeFromCart(itemId);
-// };
-
-// const handlePayment = (event) => {
-//   event.preventDefault();
-//   if (!instance) {
-//     console.error('Payment instance not loaded');
-//     return;
-//   }
-//   setProcessing(true);
-
-//   // Calculate total cart value
-//   const totalAmount = cartItems.reduce((total, item) => {
-//     return total + (parseFloat(item.price) * item.quantity);
-//   }, 0).toFixed(2);
-
-//   instance.requestPaymentMethod().then(({ nonce }) => {
-//     // Send nonce and total amount to your server for processing
-//     fetch("/payment/process", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({ paymentMethodNonce: nonce, amount: totalAmount }),
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//       if (data.success) {
-//         // Payment processed successfully
-//         console.log("Payment Success:", data);
-//         // TODO: Clear cart and show success message
-//       } else {
-//         // Payment failed
-//         console.log("Payment Failed:", data);
-//         // TODO: Show error message
-//       }
-//       setProcessing(false);
-//     })
-//     .catch(err => {
-//       console.error("Payment Error:", err);
-//       setProcessing(false);
-//     });
-//   })
-//   .catch(err => {
-//     console.error("Payment Method Error:", err);
-//     setProcessing(false);
-//   });
-// };

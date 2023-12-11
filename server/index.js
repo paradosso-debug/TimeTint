@@ -1,3 +1,4 @@
+// index.js
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
@@ -31,7 +32,7 @@ mongoose.connection.on("error", (err) => {
 // Mount your routes
 app.use("/api/reviews", reviewsRouter);
 app.use("/api/products", productRouter);
-app.use("/api", paymentRouter);
+app.use("/api/payment", paymentRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello, World!");

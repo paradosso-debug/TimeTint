@@ -605,6 +605,8 @@ button:hover {
   border: solid 1px gray;
 }
 
+
+
 /* Laptop Devices */
 @media (min-width: 1024px) and (max-width: 1440px) {
   .brand-name {
