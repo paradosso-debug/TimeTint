@@ -15,7 +15,7 @@ const Cart = () => {
       try {
         setLoading(true);
         const response = await axios.get('http://localhost:5001/api/payment/getToken');
-        console.log('Token response:', response); // Added for debugging
+        console.log('Token response:', response); 
         setClientToken(response.data); 
       } catch (err) {
         console.error('Error fetching token:', err);
