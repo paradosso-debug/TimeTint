@@ -1,31 +1,44 @@
-import React, { useState, useEffect } from 'react';
-import { useCart } from '../context/CartContext.jsx';
-import DropIn from 'braintree-web-drop-in-react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { useCart } from "../context/CartContext.jsx";
+import DropIn from "braintree-web-drop-in-react";
+import axios from "axios";
 
 const Cart = () => {
   const { cartItems, removeFromCart } = useCart();
-  const [clientToken, setClientToken] = useState('');
+  const [clientToken, setClientToken] = useState("");
   const [instance, setInstance] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
+
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [totalAmount, setTotalAmount] = useState(0);
 
   useEffect(() => {
     const getToken = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('http://localhost:5001/api/payment/getToken');
-        console.log('Token response:', response); 
-        setClientToken(response.data); 
+        const response = await axios.get(
+          "http://localhost:5001/api/payment/getToken"
+        );
+        setClientToken(response.data);
       } catch (err) {
-        console.error('Error fetching token:', err);
-        setError('Failed to fetch payment token');
+        console.error("Error fetching token:", err);
+        setError("Failed to fetch payment token");
       } finally {
         setLoading(false);
       }
     };
+
     getToken();
-  }, []);
+
+    // Calculate total amount of products
+    const total = cartItems.reduce(
+      (acc, item) => acc + item.price * item.quantity,
+      0
+    );
+    setTotalAmount(total);
+  }, [cartItems]);
 
   const handleRemove = (itemId) => {
     removeFromCart(itemId);
@@ -34,41 +47,65 @@ const Cart = () => {
   const handlePayment = async (event) => {
     event.preventDefault();
     if (!instance) {
-      setError('Payment instance not loaded');
+      setError("Payment instance not loaded");
       return;
     }
 
     try {
       setLoading(true);
       const payload = await instance.requestPaymentMethod();
-      console.log('Payment method payload:', payload); // Added for debugging
+      console.log("Payment method payload:", payload); // Added for debugging
       // Here, send payload.nonce to your server
       // ...
     } catch (err) {
-      console.error('Error processing payment:', err);
-      setError('Payment failed');
+      console.error("Error processing payment:", err);
+      setError("Payment failed");
     } finally {
       setLoading(false);
     }
   };
 
-  console.log('Client Token:', clientToken); // This should print the actual token string
-  console.log('Error:', error); // This should be empty if there's no error
-  console.log('Loading:', loading); // This should be false if it's not loading
-  
+  // Form submission for customer details (separate from payment)
+  const handleCustomerDetailsSubmit = (event) => {
+    event.preventDefault();
+    // Here, you can handle the customer details, such as sending them to a server
+    console.log("Customer Name:", name);
+    console.log("Customer Address:", address);
+  };
+
+  console.log("Client Token:", clientToken); // This should print the actual token string
+  console.log("Error:", error); // This should be empty if there's no error
+  console.log("Loading:", loading); // This should be false if it's not loading
 
   return (
     <>
       <div className="cart-wrapper">
         <div className="cart-container-first">
           <div className="cart-info-left">
-            <h1 >Payment Details</h1>
+            <h1>Payment Details</h1>
+            <form onSubmit={handleCustomerDetailsSubmit}>
+              <input
+                type="text"
+                placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Address"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              />
+              <div className="total-amount">
+                <p>Total Amount: ${totalAmount.toFixed(2)}</p>
+              </div>
+              <button type="submit">Submit Details</button>
+            </form>
             {loading && <p>Loading...</p>}
             {error && <p>Error: {error}</p>}
             {clientToken && (
-              <form  onSubmit={handlePayment}>
+              <form onSubmit={handlePayment}>
                 <DropIn
-              
                   options={{
                     authorization: clientToken,
                     paypal: { flow: "vault" },
@@ -164,7 +201,7 @@ const Cart = () => {
                         : "info-multiple"
                     }`}
                   >
-                    {item.price}
+                    ${item.price}
                   </p>
                   <p
                     className={`cart-items-info ${

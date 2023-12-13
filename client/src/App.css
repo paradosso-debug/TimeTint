@@ -282,7 +282,10 @@
   align-self: center;
 }
 
+
+
 .slider-price {
+  padding-left: 3rem;
   font-weight: bold;
   margin-top: 10px;
   color: rgb(185, 143, 125);
