@@ -12,6 +12,7 @@ const Cart = () => {
 
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
+  const [number, setNumber] = useState("");
   const [totalAmount, setTotalAmount] = useState(0);
 
   useEffect(() => {
@@ -71,6 +72,7 @@ const Cart = () => {
     // Here, you can handle the customer details, such as sending them to a server
     console.log("Customer Name:", name);
     console.log("Customer Address:", address);
+    console.log("Customer Number:", number);
   };
 
   console.log("Client Token:", clientToken); // This should print the actual token string
@@ -95,6 +97,12 @@ const Cart = () => {
                 placeholder="Address"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
+              />
+              <input
+                type="number"
+                placeholder="Phone Number"
+                value={number}
+                onChange={(e) => setNumber(e.target.value)}
               />
               <div className="total-amount">
                 <p>Total Amount: ${totalAmount.toFixed(2)}</p>
