@@ -108,7 +108,7 @@ const Product = () => {
                 <h3 className="product-name">{products[currentProductIndex].name}</h3>
                 <p>{products[currentProductIndex].description}</p>
                 <p className="slider-price">
-                  {products[currentProductIndex].price}
+                  ${products[currentProductIndex].price}
                 </p>
                 <button className="add-to-cart" onClick={handleAddToCart}>Add to Cart</button>
 

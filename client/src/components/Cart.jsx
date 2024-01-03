@@ -58,26 +58,31 @@ const Cart = () => {
       console.log("Payment method payload:", payload); // Added for debugging
       // Here, send payload.nonce to your server
       // ...
-    } catch (err) {
-      console.error("Error processing payment:", err);
-      setError("Payment failed");
-    } finally {
-      setLoading(false);
+
+     // After successful payment, send customer details to your server
+    axios.post('http://localhost:5001/api/payment/save', {
+      name, 
+      address, 
+      phone: number, 
+      amount: totalAmount
+    }).then(response => {
+      console.log('Payment details saved:', response.data);
+      // Reset the fields and total amount after successful payment
+      setName("");
+      setAddress("");
+      setNumber("");
+      setTotalAmount(0);
+      // Add any additional logic you need after successful payment and saving details
+    }).catch(error => {
+      console.error('Error saving payment details:', error);
+    });
+  } catch (err) {
+    console.error("Error processing payment:", err);
+    setError("Payment failed");
+  } finally {
+    setLoading(false);
     }
   };
-
-  // Form submission for customer details (separate from payment)
-  const handleCustomerDetailsSubmit = (event) => {
-    event.preventDefault();
-    // Here, you can handle the customer details, such as sending them to a server
-    console.log("Customer Name:", name);
-    console.log("Customer Address:", address);
-    console.log("Customer Number:", number);
-  };
-
-  console.log("Client Token:", clientToken); // This should print the actual token string
-  console.log("Error:", error); // This should be empty if there's no error
-  console.log("Loading:", loading); // This should be false if it's not loading
 
   return (
     <>
@@ -85,44 +90,43 @@ const Cart = () => {
         <div className="cart-container-first">
           <div className="cart-info-left">
             <h1>Payment Details</h1>
-            <form onSubmit={handleCustomerDetailsSubmit}>
-              <input
-                type="text"
-                placeholder="Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <input
-                type="text"
-                placeholder="Address"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-              />
-              <input
-                type="number"
-                placeholder="Phone Number"
-                value={number}
-                onChange={(e) => setNumber(e.target.value)}
-              />
-              <div className="total-amount">
-                <p>Total Amount: ${totalAmount.toFixed(2)}</p>
-              </div>
-              <button type="submit">Submit Details</button>
-            </form>
-            {loading && <p>Loading...</p>}
-            {error && <p>Error: {error}</p>}
             {clientToken && (
               <form onSubmit={handlePayment}>
+                <input
+                className="input-field"
+                  type="text"
+                  placeholder="Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <input
+                 className="input-field"
+                  type="text"
+                  placeholder="Address"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                />
+                <input
+                 className="input-field"
+                  type="number"
+                  placeholder="Phone Number"
+                  value={number}
+                  onChange={(e) => setNumber(e.target.value)}
+                />
+                <div className="total-amount">
+                  <p>Total Amount: ${totalAmount.toFixed(2)}</p>
+                </div>
                 <DropIn
                   options={{
                     authorization: clientToken,
-                    paypal: { flow: "vault" },
                   }}
                   onInstance={(instance) => setInstance(instance)}
                 />
-                <button type="submit">Make Payment</button>
+                <button className="payment-btn" type="submit">Make Payment</button>
               </form>
             )}
+            {loading && <p>Loading...</p>}
+            {error && <p>Error: {error}</p>}
           </div>
         </div>
 
