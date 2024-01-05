@@ -7,6 +7,7 @@ import ProductsPage from "./pages/ProductsPage";
 import CartPage from "./pages/CartPage";
 import { CartProvider } from "./context/CartContext";
 
+
 const App = () => {
   return (
     <BrowserRouter>

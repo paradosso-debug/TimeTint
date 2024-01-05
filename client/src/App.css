@@ -75,7 +75,6 @@
   z-index: 10; /* Ensure it's above other elements */
 }
 
-
 .main-home {
   width: 50%;
   height: auto;
@@ -282,8 +281,6 @@
   align-self: center;
 }
 
-
-
 .slider-price {
   padding-left: 3rem;
   font-weight: bold;
@@ -292,8 +289,8 @@
 }
 
 .remove-item-btn-single {
-  margin-top: 25px!important;
-  margin-left: 5rem!important;
+  margin-top: 25px !important;
+  margin-left: 5rem !important;
   padding: 9px 16px;
   background-color: white;
   color: black;
@@ -305,7 +302,7 @@
 
 .remove-item-btn-two {
   margin-top: 20px;
-  margin-left: 13rem!important;
+  margin-left: 13rem !important;
   padding: 8px 18px;
   background-color: white;
   color: black;
@@ -331,7 +328,7 @@
 
 .remove-item-btn-multiple {
   margin-top: 20px;
-  margin-left:7.6rem;
+  margin-left: 7.6rem;
   padding: 9px 19px;
   background-color: white;
   color: black;
@@ -461,8 +458,7 @@
   font-size: medium !important;
 }
 
-.cart-info-right div > .info-item-two{
- 
+.cart-info-right div > .info-item-two {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -498,7 +494,6 @@
   align-items: flex-start;
   margin-left: 1rem;
   font-size: small;
-  
 }
 
 .info-multiple {
@@ -510,7 +505,6 @@
   margin-right: -4rem;
   font-size: small;
   padding-top: 2px;
-  
 }
 
 .cart-btn {
@@ -640,7 +634,6 @@ button:hover {
   font-size: 18px;
 }
 
- 
 .payment-btn {
   background-color: #007bff;
   color: white;
@@ -655,7 +648,108 @@ button:hover {
   background-color: #0056b3;
 }
 
+/* THIS IS THE LOGINFORM CSS */
+.main-container-loginform {
+  display: flex; /* Enable Flexbox */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  min-height: 100vh; /* Full viewport height */
+}
 
+.main-container-loginform {
+  display: flex;
+  height: 100vh;
+}
+
+.wrapperleft-loginform {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-logo {
+  padding-bottom: 2rem;
+  text-align: center;
+}
+.icon {
+  height: 20px;
+  position: absolute;
+  right: 40px;
+  top: 20%;
+  transform: translate(-50%);
+}
+
+.login-form {
+  background: #e0e0e0; /* Same as the background for seamless blend */
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 8px 8px 15px #bebebe, -8px -8px 15px #ffffff; /* Neomorphism shadows */
+  width: 350px; /* Adjust as needed */
+}
+
+.input-box-loginform {
+  margin-bottom: 50px;
+  position: relative;
+  padding-left: 2rem;
+}
+
+.input-box-loginform input {
+  border: none;
+  background: none;
+  outline: none;
+  padding: 15px;
+  border-radius: 20px;
+  box-shadow: inset 8px 8px 15px #bebebe, inset -8px -8px 15px #ffffff; /* Inner shadow for input */
+}
+
+.login-btn {
+  border: none;
+  outline: none;
+  font-weight: bold;
+  border-radius: 20px;
+  padding: 8px 7rem;
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+  box-shadow: 8px 8px 15px #bebebe, -8px -8px 15px #ffffff; /* Neomorphism shadow for button */
+  cursor: pointer;
+}
+
+/* Add any additional styles you need */
+
+.wrapperright-loginform {
+  background-color: black; /* Right div background color */
+  color: white; /* Text color for the right div, since its background is black */
+  padding-top: 25rem;
+  flex: 1;
+  height: 100vh;
+}
+
+.main-container-loginform .remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14.5px;
+  margin: -15px 0 15px;
+}
+.remember-forgot label input {
+  accent-color: #ffff;
+  margin-right: 4px;
+}
+
+.remember-forgot a {
+  color: rgb(185, 143, 125);
+  text-decoration: none;
+}
+
+.remember-forgot a:hover {
+  text-decoration: underline;
+}
+
+.main-container-loginform .register-link {
+  font-size: 14.5px;
+  text-align: center;
+  margin-top: 20px;
+}
 
 /* Laptop Devices */
 @media (min-width: 1024px) and (max-width: 1440px) {
