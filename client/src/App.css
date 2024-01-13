@@ -745,8 +745,8 @@ button:hover {
   text-decoration: underline;
 }
 
-.main-container-loginform .register-link {
-  font-size: 14.5px;
+.main-container-loginform .register-login-link {
+  font-size: 15.5px;
   text-align: center;
   margin-top: 20px;
 }
