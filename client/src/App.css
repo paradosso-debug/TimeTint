@@ -749,7 +749,27 @@ button:hover {
   font-size: 15.5px;
   text-align: center;
   margin-top: 20px;
+  position: relative; 
 }
+
+.success-message {
+  color: green;
+  background-color: #eaffea;
+  border: 1px solid #b2ffb2;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 1.1em;
+  position: absolute; /* Position the message absolutely */
+  top: 0; /* Align to the top of the main container */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Offset by 50% of its own width to truly center it */
+  width: 100%; /* Take up full width */
+  max-width: 400px; /* Maximum width of the message box */
+  box-sizing: border-box; /* Ensure padding is included in width */
+}
+
 
 /* Laptop Devices */
 @media (min-width: 1024px) and (max-width: 1440px) {

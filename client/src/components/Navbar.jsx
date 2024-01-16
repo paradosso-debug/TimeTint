@@ -15,7 +15,7 @@ const Navbar = () => {
             <Link to='/' className='brand-name'>TimeTint</Link>
             <Link to='/' className='nav-links'>Home</Link>
             <Link to='/login' className='nav-links'>Login</Link>
-            <Link to='/sign-up' className='nav-links'>Register</Link>
+            <Link to='/profile' className='nav-links'>Profile</Link>
             <Link to='/products' className='nav-links'>Products</Link>
             <div className='cart-icon'>
             <Link to='/cart'>

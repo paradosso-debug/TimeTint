@@ -7,7 +7,8 @@ import bodyParser from "body-parser";
 import reviewsRouter from "./routes/reviews.js";
 import productRouter from "./routes/product.js";
 import paymentRouter from "./routes/paymentRoutes.js";
-
+import userRouter from "./routes/userRoutes.js";
+import loginRouter from "./routes/loginRoutes.js";
 dotenv.config();
 
 const app = express();
@@ -33,6 +34,8 @@ mongoose.connection.on("error", (err) => {
 app.use("/api/reviews", reviewsRouter);
 app.use("/api/products", productRouter);
 app.use("/api/payment", paymentRouter);
+app.use("/api/register", userRouter);
+app.use("/api", loginRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello, World!");
