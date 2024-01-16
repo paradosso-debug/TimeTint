@@ -57,8 +57,54 @@ const LoginForm = () => {
 
           {isRegistering ? (
             <form className='login-form' onSubmit={handleRegisterSubmit}>
-              {/* Registration Form Fields */}
-              {/* ... */}
+              <h1 className='login-logo'>Register</h1>
+              <div className='input-box-loginform'>
+                <input 
+                  type="text" 
+                  name="username" 
+                  placeholder='Username' 
+                  required
+                  value={registerData.username}
+                  onChange={(e) => setRegisterData({...registerData, username: e.target.value})}
+                />
+                <FaUser className='icon'/>
+              </div>
+              <div className='input-box-loginform'>
+                <input 
+                  type="password" 
+                  name="password" 
+                  placeholder='Password' 
+                  required
+                  value={registerData.password}
+                  onChange={(e) => setRegisterData({...registerData, password: e.target.value})}
+                />
+                <FaLock className='icon' />
+              </div>
+              <div className='input-box-loginform'>
+                <input 
+                  type="text" 
+                  name="address" 
+                  placeholder='Address' 
+                  required
+                  value={registerData.address}
+                  onChange={(e) => setRegisterData({...registerData, address: e.target.value})}
+                />
+              </div>
+              <div className='input-box-loginform'>
+                <input 
+                  type="tel" 
+                  name="phone" 
+                  placeholder='Phone Number' 
+                  required
+                  value={registerData.phone}
+                  onChange={(e) => setRegisterData({...registerData, phone: e.target.value})}
+                />
+              </div>
+              <button type='submit' className='login-btn'>Register</button>
+              <p className="register-login-link">Have an account? <a href="#" onClick={(e) => {
+                e.preventDefault();
+                setIsRegistering(false);
+              }}>Back to Login</a></p>
             </form>
           ) : (
             <form className='login-form' onSubmit={handleLoginSubmit}>
@@ -91,7 +137,10 @@ const LoginForm = () => {
               </div>
               <button type='submit' className='login-btn'>Login</button>
               <div className="register-login-link">
-                <p>Don't have an account? <a href="#" onClick={() => setIsRegistering(true)}>Register</a></p>
+                <p>Don't have an account? <a href="#" onClick={(e) => {
+                  e.preventDefault();
+                  setIsRegistering(true);
+                }}>Register</a></p>
               </div>
             </form>
           )}
