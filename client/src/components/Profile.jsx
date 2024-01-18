@@ -1,36 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+  
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
   const [cartItems, setCartItems] = useState([]);
+  const [newPassword, setNewPassword] = useState('');
+  const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
-  // This useEffect would be used to fetch user data and cart items when the component mounts
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        // Retrieve the token from local storage or your state management solution
         const token = localStorage.getItem('token');
-
-        // Make the authenticated request
         const userResponse = await axios.get('http://localhost:5001/api/user/profile', {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
+          headers: { Authorization: `Bearer ${token}` }
         });
-
         setUserData(userResponse.data);
       } catch (error) {
         console.error('Error fetching user data:', error);
+        setError('Failed to fetch user data');
       }
     };
+
     const fetchCartItems = async () => {
       try {
-        // Replace with your actual API endpoint and include any needed headers
         const cartResponse = await axios.get('http://localhost:5001/api/user/cart');
         setCartItems(cartResponse.data);
       } catch (error) {
         console.error('Error fetching cart items:', error);
+        setError('Failed to fetch cart items');
       }
     };
 
@@ -38,44 +37,55 @@ const Profile = () => {
     fetchCartItems();
   }, []);
 
-  const handlePasswordReset = async (newPassword) => {
+  const handlePasswordReset = async () => {
     try {
-      // Replace with your actual API endpoint and include any needed headers
       const response = await axios.post('http://localhost:5001/api/user/reset-password', { newPassword });
       console.log('Password reset successful', response.data);
-      // Handle additional logic after password reset, like showing a message
+      setSuccessMessage('Password reset successful');
     } catch (error) {
       console.error('Error resetting password:', error);
+      setError('Error resetting password');
     }
   };
 
   return (
-    <div>
+    <div className="profile-container">
       <h1>Profile</h1>
-      {userData && (
-        <div>
-          <p>Name: {userData.name}</p>
-          <p>Email: {userData.email}</p>
-          <p>Address: {userData.address}</p>
-          {/* Other user details */}
-        </div>
-      )}
+      {error && <p className="error">{error}</p>}
+      {successMessage && <p className="success">{successMessage}</p>}
+      <div className="user-details">
+        {userData && (
+          <div>
+            <p>Name: {userData.name}</p>
+            <p>Email: {userData.email}</p>
+            <p>Address: {userData.address}</p>
+            {/* Other user details */}
+          </div>
+        )}
+      </div>
 
-      {/* Placeholder for password reset, implement a form to handle new password input */}
-      <button onClick={() => handlePasswordReset('newPassword')}>Reset Password</button>
+      <div className="password-reset">
+        <input 
+          type="password" 
+          value={newPassword} 
+          onChange={(e) => setNewPassword(e.target.value)} 
+          placeholder="Enter new password" 
+        />
+        <button onClick={handlePasswordReset}>Reset Password</button>
+      </div>
 
-      <h2>Cart Items</h2>
-      {cartItems.length > 0 ? (
-        <ul>
-          {cartItems.map(item => (
-            <li key={item.id}>
-              {item.name} - Quantity: {item.quantity}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>Your cart is empty.</p>
-      )}
+      <div className="cart-details">
+        <h2>Cart Items</h2>
+        {cartItems.length > 0 ? (
+          <ul>
+            {cartItems.map(item => (
+              <li key={item.id}>{item.name} - Quantity: {item.quantity}</li>
+            ))}
+          </ul>
+        ) : (
+          <p>Your cart is empty.</p>
+        )}
+      </div>
     </div>
   );
 };

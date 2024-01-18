@@ -36,7 +36,7 @@ const LoginForm = () => {
   const handleRegisterSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5001/api/register', registerData);
+      const response = await axios.post('http://localhost:5001/api/user', registerData);
       console.log(response.data);
       setSuccessMessage("Registration successful. You can now log in.");
       setRegisterData({ username: '', password: '', address: '', phone: '' });
