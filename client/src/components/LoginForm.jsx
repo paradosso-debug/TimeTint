@@ -6,7 +6,7 @@ import axios from 'axios';
 const LoginForm = () => {
   const [isRegistering, setIsRegistering] = useState(false);
   const [loginData, setLoginData] = useState({ username: '', password: '' });
-  const [registerData, setRegisterData] = useState({ username: '', password: '', address: '', phone: '' });
+  const [registerData, setRegisterData] = useState({ username: '', password: '', address: '', phone: '', email: '', name: '',});
   const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate();
 
@@ -98,6 +98,26 @@ const LoginForm = () => {
                   required
                   value={registerData.phone}
                   onChange={(e) => setRegisterData({...registerData, phone: e.target.value})}
+                />
+              </div>
+              <div className='input-box-loginform'>
+                <input 
+                  type="text" 
+                  name="name" 
+                  placeholder='Ful Name' 
+                  required
+                  value={registerData.name}
+                  onChange={(e) => setRegisterData({...registerData, name: e.target.value})}
+                />
+              </div>
+              <div className='input-box-loginform'>
+                <input 
+                  type="text" 
+                  name="email" 
+                  placeholder='Email' 
+                  required
+                  value={registerData.email}
+                  onChange={(e) => setRegisterData({...registerData, email: e.target.value})}
                 />
               </div>
               <button type='submit' className='login-btn'>Register</button>

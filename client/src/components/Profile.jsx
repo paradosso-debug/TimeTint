@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-  
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
@@ -13,10 +12,11 @@ const Profile = () => {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem('token');
-        const userResponse = await axios.get('http://localhost:5001/api/user/profile', {
+        const userResponse = await axios.get('http://localhost:5001/api/user/', {
           headers: { Authorization: `Bearer ${token}` }
         });
-        setUserData(userResponse.data);
+        // Assuming the user data is returned in the `data` field of the response
+        setUserData(userResponse.data.data);
       } catch (error) {
         console.error('Error fetching user data:', error);
         setError('Failed to fetch user data');
@@ -55,7 +55,7 @@ const Profile = () => {
       {successMessage && <p className="success">{successMessage}</p>}
       <div className="user-details">
         {userData && (
-          <div>
+          <div className='user-info'>
             <p>Name: {userData.name}</p>
             <p>Email: {userData.email}</p>
             <p>Address: {userData.address}</p>

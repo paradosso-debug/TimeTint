@@ -14,6 +14,8 @@ const userSchema = new mongoose.Schema({
   },
   address: String,
   phone: String,
+  email: String,
+  name: String,
 });
 
 // Password hashing middleware
