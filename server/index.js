@@ -3,18 +3,17 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
-import bodyParser from "body-parser";
 import reviewsRouter from "./routes/reviews.js";
 import productRouter from "./routes/product.js";
 import paymentRouter from "./routes/paymentRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 import loginRouter from "./routes/loginRoutes.js";
+
 dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(bodyParser.json());
 
 const mongoURI = process.env.MONGODB_URL;
 mongoose.connect(mongoURI, {
