@@ -26,12 +26,9 @@ const Profile = () => {
     const fetchCartItems = async () => {
       try {
         const token = localStorage.getItem("token");
-        const cartResponse = await axios.get(
-          "http://localhost:5001/api/products",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const cartResponse = await axios.get("http://localhost:5001/api/mycart", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         setCartItems(cartResponse.data);
       } catch (error) {
         console.error("Error fetching cart items:", error);
@@ -89,9 +86,9 @@ const Profile = () => {
           <ul>
             {cartItems.map((item) => (
               <li key={item.id}>
-                {item.name} - Quantity: {item.quantity}
-                <img src={item.imageUrl} alt={item.name} />{" "}
-                {/* Ensure this matches your data structure */}
+                {item.name} - Description: {item.description}, Price: $
+                {item.price}, Quantity: {item.quantity}
+                <img src={item.imageUrl} alt={item.name} />
               </li>
             ))}
           </ul>

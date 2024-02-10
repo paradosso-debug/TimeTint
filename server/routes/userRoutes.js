@@ -66,17 +66,4 @@ router.get("/user", authenticateToken, async (req, res) => {
   }
 });
 
-// Example endpoint in userRoutes.js
-router.get("/cart", authenticateToken, async (req, res) => {
-  // Assuming you have a way to identify the user, e.g., from the JWT token
-  try {
-    const userId = req.user.id; // Or however you extract the user ID from the token
-    const userCartItems = await CartModel.find({ userId: userId });
-    res.json(userCartItems);
-  } catch (error) {
-    console.error("Error fetching cart items:", error);
-    res.status(500).send("Failed to fetch cart items");
-  }
-});
-
 export default router;

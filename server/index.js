@@ -34,6 +34,7 @@ app.use("/api/reviews", reviewsRouter);
 app.use("/api/products", productRouter);
 app.use("/api/payment", paymentRouter);
 app.use("/api/user", userRouter);
+
 app.use("/api", loginRouter);
 
 app.get("/", (req, res) => {
