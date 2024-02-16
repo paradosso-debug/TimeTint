@@ -26,7 +26,7 @@ const Profile = () => {
     const fetchCartItems = async () => {
       try {
         const token = localStorage.getItem("token");
-        const cartResponse = await axios.get("http://localhost:5001/api/mycart", {
+        const cartResponse = await axios.get("http://localhost:5001/api/cart", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setCartItems(cartResponse.data);
@@ -83,17 +83,16 @@ const Profile = () => {
       <div className="cart-details">
         <h2>Cart Items</h2>
         {cartItems.length > 0 ? (
-          <ul>
-            {cartItems.map((item) => (
-              <li key={item.id}>
-                {item.name} - Description: {item.description}, Price: $
-                {item.price}, Quantity: {item.quantity}
-                <img src={item.imageUrl} alt={item.name} />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>Your cart is empty.</p>
+           <ul>
+           {cartItems.map((item) => (
+             <li key={item.id}>
+               {item.name} - Description: {item.description}, Price: ${item.price}, Quantity: {item.quantity}
+               <img src={item.imageUrl} alt={item.name} style={{ maxWidth: "100px" }} /> {/* Ensure this line is correct */}
+             </li>
+           ))}
+         </ul>
+       ) : (
+         <p>Your cart is empty.</p>
         )}
       </div>
     </div>
