@@ -15,24 +15,34 @@ const Profile = () => {
         const userResponse = await axios.get("http://localhost:5001/api/user", {
           headers: { Authorization: `Bearer ${token}` },
         });
-        // Assuming the user data is returned in the `data` field of the response
         setUserData(userResponse.data);
       } catch (error) {
+        if (error.response && error.response.status === 401) {
+          setError("Unauthorized access. Please log in again.");
+        } else if (error.response && error.response.status === 403) {
+          setError("Forbidden. Invalid token.");
+        } else {
+          setError("Failed to fetch user data");
+        }
         console.error("Error fetching user data:", error);
-        setError("Failed to fetch user data");
       }
     };
 
     const fetchCartItems = async () => {
       try {
         const token = localStorage.getItem("token");
-        const cartResponse = await axios.get("http://localhost:5001/api/cart", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const cartResponse = await axios.get(
+          "http://localhost:5001/api/cart/user-cart",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+
+        console.log("Fetched cart items:", cartResponse.data); // Debugging
         setCartItems(cartResponse.data);
       } catch (error) {
         console.error("Error fetching cart items:", error);
-        setError("Failed to fetch cart items");
+        setError("Failed to fetch cart items from server.");
       }
     };
 
@@ -65,7 +75,7 @@ const Profile = () => {
             <p>Name: {userData.name}</p>
             <p>Email: {userData.email}</p>
             <p>Address: {userData.address}</p>
-            <p>Phone: {userData.phone}</p> {/* Add this line */}
+            <p>Phone: {userData.phone}</p>
           </div>
         )}
       </div>
@@ -83,16 +93,23 @@ const Profile = () => {
       <div className="cart-details">
         <h2>Cart Items</h2>
         {cartItems.length > 0 ? (
-           <ul>
-           {cartItems.map((item) => (
-             <li key={item.id}>
-               {item.name} - Description: {item.description}, Price: ${item.price}, Quantity: {item.quantity}
-               <img src={item.imageUrl} alt={item.name} style={{ maxWidth: "100px" }} /> {/* Ensure this line is correct */}
-             </li>
-           ))}
-         </ul>
-       ) : (
-         <p>Your cart is empty.</p>
+          <ul>
+            {cartItems.map((item) => (
+              <li key={item?.product?._id}>
+                {item?.product?.name ? item.product.name : "Unknown Product"} -
+                Description: {item?.product?.description || "No description"},
+                Price: ${item?.product?.price || "N/A"}, Quantity:{" "}
+                {item.quantity}
+                <img
+                  src={item?.product?.imageUrl || ""}
+                  alt={item?.product?.name || "Product Image"}
+                  style={{ maxWidth: "100px" }}
+                />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>Your cart is empty.</p>
         )}
       </div>
     </div>

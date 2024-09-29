@@ -1,24 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
-import { useCart } from '../context/CartContext.jsx'; 
-
-
+import { useCart } from "../context/CartContext.jsx";
 
 const Product = () => {
   const [products, setProducts] = useState([]);
   const [currentProductIndex, setCurrentProductIndex] = useState(0);
   const { addToCart } = useCart(); // Destructure the addToCart function from the context for use
 
-  
   const handleAddToCart = () => {
     const product = products[currentProductIndex];
     addToCart(product);
   };
-
- 
-
-
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -43,9 +36,6 @@ const Product = () => {
   const handleNext = () => {
     setCurrentProductIndex((prevIndex) => (prevIndex + 1) % products.length);
   };
-
-
- 
 
   return (
     <div className="products-wrapper">
@@ -98,20 +88,27 @@ const Product = () => {
               <div>Loading...</div>
             )}
             <div className="slider-navigation">
-              <button className="slider-button" onClick={handlePrev}>&lt;</button>
-              <button className="slider-button" onClick={handleNext}>&gt;</button>
+              <button className="slider-button" onClick={handlePrev}>
+                &lt;
+              </button>
+              <button className="slider-button" onClick={handleNext}>
+                &gt;
+              </button>
             </div>
           </div>
           <div className="slider-description">
             {products.length > 0 && (
               <>
-                <h3 className="product-name">{products[currentProductIndex].name}</h3>
+                <h3 className="product-name">
+                  {products[currentProductIndex].name}
+                </h3>
                 <p>{products[currentProductIndex].description}</p>
                 <p className="slider-price">
                   ${products[currentProductIndex].price}
                 </p>
-                <button className="add-to-cart" onClick={handleAddToCart}>Add to Cart</button>
-
+                <button className="add-to-cart" onClick={handleAddToCart}>
+                  Add to Cart
+                </button>
               </>
             )}
           </div>
